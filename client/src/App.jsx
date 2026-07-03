@@ -4,7 +4,7 @@ import "./index.css";
 import jsPDF from "jspdf";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
-
+const API_URL = "https://ai-startup-validator-ta75.onrender.com";
 const agentEmojis = {
   investor: "🧠",
   customer: "👤",
@@ -300,7 +300,7 @@ export default function App() {
     setResult(null);
     setError("");
     try {
-      const res = await axios.post("http://localhost:5000/api/enhance", { rawIdea });
+      const res = await axios.post(`${API_URL}/api/enhance`, { rawIdea });
       setEnhancedIdea(res.data.enhanced);
     } catch (err) {
       setError(err.response?.data?.error || "Enhancement failed. Try again.");
@@ -319,7 +319,7 @@ export default function App() {
     try {
       const token = localStorage.getItem("token");
       const res = await axios.post(
-        "http://localhost:5000/api/validate",
+       `${API_URL}/api/validate`,
         { idea: ideaToValidate },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -338,7 +338,7 @@ export default function App() {
     setLoadingHistory(true);
     try {
       const token = localStorage.getItem("token");
-      const res = await axios.get("http://localhost:5000/api/history", {
+      const res = await axios.get(`${API_URL}/api/history`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setHistory(res.data);
@@ -360,7 +360,7 @@ export default function App() {
     if (!window.confirm("Delete this validation?")) return;
     try {
       const token = localStorage.getItem("token");
-      await axios.delete(`http://localhost:5000/api/history/${id}`, {
+      await axios.delete(`${API_URL}/api/history/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setHistory(history.filter((item) => item._id !== id));
@@ -375,7 +375,7 @@ export default function App() {
     try {
       const token = localStorage.getItem("token");
       const res = await axios.post(
-        "http://localhost:5000/api/roadmap",
+       `${API_URL}/api/roadmap`,
         { idea: result.idea, verdict: result.verdict },
         { headers: { Authorization: `Bearer ${token}` } }
       );
