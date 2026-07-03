@@ -1,7 +1,7 @@
 import express from 'express'
 import Groq from 'groq-sdk'
 import dotenv from 'dotenv'
-import Validation from '../models/Validation.js'
+import validation from "../models/validation.js";
 import jwt from 'jsonwebtoken'
 import User from '../models/User.js'
 dotenv.config()

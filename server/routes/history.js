@@ -1,5 +1,5 @@
 import express from 'express'
-import Validation from '../models/Validation.js'
+import validation from '../models/Validation.js'
 
 const router = express.Router()
 
