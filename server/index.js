@@ -18,7 +18,7 @@ console.log("MONGO_URI loaded:", process.env.MONGO_URL);
 const app = express()
 
 app.use(cors({
-  origin: ['*'],
+  origin: ['https://ai-startup-validator-client.onrender.com'],
   methods: ['GET', 'POST', 'DELETE'],
 }))
 
