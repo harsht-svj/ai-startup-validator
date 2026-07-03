@@ -354,20 +354,37 @@ export default function App() {
     setSelectedHistory(null);
     fetchHistory();
   };
+const handleDelete = async (id, e) => {
+  e.stopPropagation();
 
-  const handleDelete = async (id, e) => {
-    e.stopPropagation();
-    if (!window.confirm("Delete this validation?")) return;
-    try {
-      const token = localStorage.getItem("token");
-      await axios.delete(`${API_URL}/api/history/${id}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      setHistory(history.filter((item) => item._id !== id));
-    } catch (err) {
-      console.error(err);
-    }
-  };
+  if (!window.confirm("Delete this validation?")) return;
+
+  try {
+    const token = localStorage.getItem("token");
+
+    console.log("Deleting:", id);
+
+    const res = await axios.delete(`${API_URL}/api/history/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    console.log("Delete Success:", res.data);
+
+    setHistory((prev) => prev.filter((item) => item._id !== id));
+
+  } catch (err) {
+    console.error("DELETE ERROR:", err);
+
+    alert(
+      err.response?.data?.error ||
+      err.message ||
+      "Delete failed"
+    );
+  }
+};
+
 
   const handleRoadmap = async () => {
     setLoadingRoadmap(true);
