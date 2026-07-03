@@ -3,8 +3,13 @@ import Groq from 'groq-sdk'
 import dotenv from 'dotenv'
 dotenv.config()
 
+console.log("GROQ =", process.env.GROQ_API_KEY);
+console.log("JWT =", process.env.JWT_SECRET);
+console.log("MONGO =", process.env.MONGO_URL);
+
 const router = express.Router()
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY })
+
 
 router.post('/enhance', async (req, res) => {
   try {
@@ -28,10 +33,14 @@ router.post('/enhance', async (req, res) => {
     const enhanced = response.choices[0].message.content
     res.json({ enhanced })
 
-  } catch (error) {
-    console.log('Error:', error)
-    res.status(500).json({ error: 'Something went wrong' })
-  }
+  }catch (error) {
+    console.error(error);
+
+    res.status(500).json({
+        message: error.message,
+        stack: error.stack
+    });
+}
 })
 
 export default router
