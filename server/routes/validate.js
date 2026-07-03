@@ -126,7 +126,7 @@ await user.save()
       synthesizerPrompt(idea, investorFeedback, customerFeedback, competitorFeedback)
     )
 
-    await Validation.create({
+    await validation.create({
       userId: decoded.id,
       idea,
       agents: {
