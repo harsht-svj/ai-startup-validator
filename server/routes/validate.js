@@ -3,7 +3,7 @@ import Groq from 'groq-sdk'
 import dotenv from 'dotenv'
 import validation from "../models/validation.js";
 import jwt from 'jsonwebtoken'
-import User from '../models/User.js'
+import User from "../models/user.js";
 dotenv.config()
 
 const router = express.Router()
