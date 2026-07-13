@@ -3,9 +3,7 @@ import Groq from 'groq-sdk'
 import dotenv from 'dotenv'
 dotenv.config()
 
-console.log("GROQ =", process.env.GROQ_API_KEY);
-console.log("JWT =", process.env.JWT_SECRET);
-console.log("MONGO =", process.env.MONGO_URL);
+
 
 const router = express.Router()
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY })
